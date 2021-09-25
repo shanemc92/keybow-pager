@@ -9,13 +9,13 @@ pages = {}
 pages.DESKTOP = 0
 pages.CODING = 1
 pages.APPS = 2
-pages.UNUSED_3 = 3
+pages.NUMPAD = 3
 
 pages.colors = {}
 pages.colors[pages.DESKTOP] = color.RED;
 pages.colors[pages.CODING] = color.GREEN;
 pages.colors[pages.APPS] = color.BLUE;
-pages.colors[pages.UNUSED_3] = color.YELLOW;
+pages.colors[pages.NUMPAD] = color.YELLOW;
 
 pages.operations = {}
 pages.operations[pages.DESKTOP] = {
@@ -60,18 +60,18 @@ pages.operations[pages.APPS] = {
     operations.tap_c
 }
 
-pages.operations[pages.UNUSED_3] = {
-    operations.tap_d,
-    operations.tap_d,
-    operations.tap_d,
-    operations.tap_d,
-    operations.tap_d,
-    operations.tap_d,
-    operations.tap_d,
-    operations.tap_d,
-    operations.tap_d,
-    operations.tap_d,
-    operations.tap_d
+pages.operations[pages.NUMPAD] = {
+    operations.num_7,
+    operations.num_8,
+    operations.num_9,
+    operations.num_4,
+    operations.num_5,
+    operations.num_6,
+    operations.num_1,
+    operations.num_2,
+    operations.num_3,
+    operations.num_0,
+    operations.full_stop
 }
 
 pages.operation_colors = {}
@@ -90,7 +90,7 @@ pages.operation_colors[pages.APPS] = {
     color.BLUE, color.BLUE, color.BLUE, color.BLUE,
     color.BLUE, color.BLUE, color.BLUE
 }
-pages.operation_colors[pages.UNUSED_3] = {
+pages.operation_colors[pages.NUMPAD] = {
     color.YELLOW, color.YELLOW, color.YELLOW, color.YELLOW,
     color.YELLOW, color.YELLOW, color.YELLOW, color.YELLOW,
     color.YELLOW, color.YELLOW, color.YELLOW
@@ -105,14 +105,19 @@ pages.button_map = {
 }
 
 
--- the current page. Default at startup is desktop.
-pages.page = pages.DESKTOP
+-- the current page. Default at startup is numpad.
+pages.page = pages.NUMPAD
 
-function pages.cycle_page()
-    if (pages.page < 3) then
-        pages.page = pages.page + 1
-    else 
-        pages.page = 0
+
+function pages.cycle_page(page_)
+    if page_ == nil then
+        if (pages.page < 3) then
+            pages.page = pages.page + 1
+        else 
+            pages.page = 0
+        end
+    else
+        pages.page = page_
     end
     button.set_color(button.TOGGLE, color.NONE)
     if (pages.page == pages.DESKTOP) then
@@ -121,8 +126,8 @@ function pages.cycle_page()
         button.set_color(button.TOGGLE, pages.colors[pages.CODING])
     elseif (pages.page == pages.APPS) then
         button.set_color(button.TOGGLE, pages.colors[pages.APPS])
-    elseif (pages.page == pages.UNUSED_3) then
-        button.set_color(button.TOGGLE, pages.colors[pages.UNUSED_3])
+    elseif (pages.page == pages.NUMPAD) then
+        button.set_color(button.TOGGLE, pages.colors[pages.NUMPAD])
     end
     
     for i = 1, 11, 1

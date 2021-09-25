@@ -86,3 +86,47 @@ end
 function operations.tap_d()
     keybow.tap_key('d')
 end
+
+function operations.num_1()
+    keybow.tap_key('1')
+end
+
+function operations.num_2()
+    keybow.tap_key('2')
+end
+
+function operations.num_3()
+    keybow.tap_key('3')
+end
+
+function operations.num_4()
+    keybow.tap_key('4')
+end
+
+function operations.num_5()
+    keybow.tap_key('5')
+end
+
+function operations.num_6()
+    keybow.tap_key('6')
+end
+
+function operations.num_7()
+    keybow.tap_key('7')
+end
+
+function operations.num_8()
+    keybow.tap_key('8')
+end
+
+function operations.num_9()
+    keybow.tap_key('9')
+end
+
+function operations.num_0()
+    keybow.tap_key('0')
+end
+
+function operations.full_stop()
+    keybow.tap_key('.')
+end

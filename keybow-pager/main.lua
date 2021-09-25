@@ -6,7 +6,7 @@ require 'keybow-pager/pages'
 function setup() 
     keybow.auto_lights(false)
     keybow.clear_lights()
-    pages.set_page(pages.page)
+    pages.cycle_page(pages.page)
 end
 
 -- Key mappings --
@@ -79,7 +79,7 @@ end
 
 function handle_key_11(pressed)
     if (pressed) then
-        pages.cycle_page()
+        pages.cycle_page(nil)
     end
 end
 
