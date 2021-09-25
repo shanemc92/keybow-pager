@@ -19,70 +19,113 @@ pages.colors[pages.UNUSED_3] = color.YELLOW;
 
 pages.operations = {}
 pages.operations[pages.DESKTOP] = {
-    operations.chrome_close_tab, nil,                    operations.scroll_up, operations.text_bigger,
-    operations.browser_back, operations.browser_forward, operations.scroll_down, operations.text_smaller
+    operations.tap_a,
+    operations.tap_a,
+    operations.tap_a,
+    operations.tap_a,
+    operations.tap_a,
+    operations.tap_a,
+    operations.tap_a,
+    operations.tap_a,
+    operations.tap_a,
+    operations.tap_a,
+    operations.tap_a
 }
 
 pages.operations[pages.CODING] = {
-    operations.git_tree, operations.git_pull, operations.git_commit_a, operations.git_push,
-    operations.pycharm_back, operations.pycharm_to_declaration, nil, nil
+    operations.tap_b,
+    operations.tap_b,
+    operations.tap_b,
+    operations.tap_b,
+    operations.tap_b,
+    operations.tap_b,
+    operations.tap_b,
+    operations.tap_b,
+    operations.tap_b,
+    operations.tap_b,
+    operations.tap_b
 }
 
 pages.operations[pages.APPS] = {
-    operations.open_chrome, nil, nil, nil,
-    nil, nil, nil, nil
+    operations.tap_c,
+    operations.tap_c,
+    operations.tap_c,
+    operations.tap_c,
+    operations.tap_c,
+    operations.tap_c,
+    operations.tap_c,
+    operations.tap_c,
+    operations.tap_c,
+    operations.tap_c,
+    operations.tap_c
 }
 
 pages.operations[pages.UNUSED_3] = {
-    nil, nil, nil, nil,
-    nil, nil, nil, nil
+    operations.tap_d,
+    operations.tap_d,
+    operations.tap_d,
+    operations.tap_d,
+    operations.tap_d,
+    operations.tap_d,
+    operations.tap_d,
+    operations.tap_d,
+    operations.tap_d,
+    operations.tap_d,
+    operations.tap_d
 }
 
 pages.operation_colors = {}
 pages.operation_colors[pages.DESKTOP] = {
-    color.RED,  nil,        color.DARK_YELLOW, color.DARK_GREEN,
-    color.GRAY, color.GRAY, color.DARK_YELLOW, color.DARK_GREEN
+    color.RED, color.RED, color.RED, color.RED,
+    color.RED, color.RED, color.RED, color.RED,
+    color.RED, color.RED, color.RED
 }
 pages.operation_colors[pages.CODING] = {
-    color.RED,   color.RED,   color.RED, color.RED,        
-    color.GREEN, color.GREEN, nil,       nil
+    color.GREEN, color.GREEN, color.GREEN, color.GREEN,
+    color.GREEN, color.GREEN, color.GREEN, color.GREEN,
+    color.GREEN, color.GREEN, color.GREEN
 }
 pages.operation_colors[pages.APPS] = {
-    color.YELLOW, nil, nil, nil,
-    nil, nil, nil, nil
+    color.BLUE, color.BLUE, color.BLUE, color.BLUE,
+    color.BLUE, color.BLUE, color.BLUE, color.BLUE,
+    color.BLUE, color.BLUE, color.BLUE
 }
 pages.operation_colors[pages.UNUSED_3] = {
-    nil, nil, nil, nil,
-    nil, nil, nil, nil
+    color.YELLOW, color.YELLOW, color.YELLOW, color.YELLOW,
+    color.YELLOW, color.YELLOW, color.YELLOW, color.YELLOW,
+    color.YELLOW, color.YELLOW, color.YELLOW
 }
 
 
 pages.button_map = {
-    button.ACTION_A0, button.ACTION_A1, button.ACTION_A2, button.ACTION_A3,
-    button.ACTION_B0, button.ACTION_B1, button.ACTION_B2, button.ACTION_B3
+    button.ACTION_1, button.ACTION_2, button.ACTION_3,
+    button.ACTION_4, button.ACTION_5, button.ACTION_6,
+    button.ACTION_7, button.ACTION_8, button.ACTION_9,
+    button.ACTION_10, button.ACTION_11
 }
 
 
 -- the current page. Default at startup is desktop.
 pages.page = pages.DESKTOP
 
-function pages.set_page(page_)
-    pages.page = page_
-    button.set_color(button.TAB_0, color.NONE)
-    button.set_color(button.TAB_1, color.NONE)
-    button.set_color(button.TAB_2, color.NONE)
-    button.set_color(button.TAB_3, color.NONE)
+function pages.cycle_page()
+    if (pages.page < 3) then
+        pages.page = pages.page + 1
+    else 
+        pages.page = 0
+    end
+    button.set_color(button.TOGGLE, color.NONE)
     if (pages.page == pages.DESKTOP) then
-        button.set_color(button.TAB_0, pages.colors[pages.DESKTOP])
+        button.set_color(button.TOGGLE, pages.colors[pages.DESKTOP])
     elseif (pages.page == pages.CODING) then
-        button.set_color(button.TAB_1, pages.colors[pages.CODING])
+        button.set_color(button.TOGGLE, pages.colors[pages.CODING])
     elseif (pages.page == pages.APPS) then
-        button.set_color(button.TAB_2, pages.colors[pages.APPS])
+        button.set_color(button.TOGGLE, pages.colors[pages.APPS])
     elseif (pages.page == pages.UNUSED_3) then
-        button.set_color(button.TAB_3, pages.colors[pages.UNUSED_3])
+        button.set_color(button.TOGGLE, pages.colors[pages.UNUSED_3])
     end
     
-    for i = 1, 8, 1
+    for i = 1, 11, 1
     do
         if (pages.operations[pages.page][i] ~= nil) then
             button.set_color(pages.button_map[i], pages.operation_colors[pages.page][i])
@@ -93,7 +136,7 @@ function pages.set_page(page_)
 end
 
 function pages.get_operation_for_action_button(button_id)
-    for i = 1, 8, 1
+    for i = 1, 11, 1
     do
         if (pages.button_map[i] == button_id) then
             return pages.operations[pages.page][i]

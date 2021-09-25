@@ -70,3 +70,19 @@ function spotlight(command)
     keybow.tap_enter()
     keybow.sleep(500)
 end
+
+function operations.tap_a()
+    keybow.tap_key('a')
+end
+
+function operations.tap_b()
+    keybow.tap_key('b')
+end
+
+function operations.tap_c()
+    keybow.tap_key('c')
+end
+
+function operations.tap_d()
+    keybow.tap_key('d')
+end
