@@ -1,10 +1,10 @@
 # keybow-pager
 
-lua code to extend the keybow pimoroni system to support four "pages", thus extending the number
+lua code to extend the keybow pimoroni system to support multiple pages of operations, thus extending the number
 of possible operations.
 
-The four pages can be switched as tabs using the topmost four buttons. This changes the behavior of
-the operations on the remaining buttons
+The four pages can be switched using button 12 which is the top-right under the Keybow text on the PCB. This cycles through the various tabs of
+operations for the other 11 buttons
 
 ## Installation
 
