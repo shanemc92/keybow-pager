@@ -2,64 +2,37 @@ require 'keybow-pager/keybow'
 
 operations = {}
 
-function operations.browser_back()
-    keybow.tap_key_with_modifiers('[', keybow.LEFT_META)
+-- GENERAL
+function operations.copy()
+    keybow.tap_key_with_modifiers('c', keybow.LEFT_CTRL)
 end
 
-function operations.browser_forward()
-    keybow.tap_key_with_modifiers(']', keybow.LEFT_META)
+function operations.cut()
+    keybow.tap_key_with_modifiers('x', keybow.LEFT_CTRL)
 end
 
-function operations.chrome_close_tab()
-    keybow.tap_key_with_modifiers('w', keybow.LEFT_META)
+function operations.paste()
+    keybow.tap_key_with_modifiers('v', keybow.LEFT_CTRL)
 end
 
-function operations.text_bigger()
-    keybow.tap_key_with_modifiers('+', keybow.LEFT_META)
+function operations.select_all()
+    keybow.tap_key_with_modifiers('a', keybow.LEFT_CTRL)
 end
 
-function operations.text_smaller()
-    keybow.tap_key_with_modifiers('-', keybow.LEFT_META)
+function operations.redo()
+    keybow.tap_key_with_modifiers('y', keybow.LEFT_CTRL)
 end
 
-function operations.scroll_up()
-    keybow.tap_key(keybow.UP_ARROW)
+function operations.undo()
+    keybow.tap_key_with_modifiers('z', keybow.LEFT_CTRL)
 end
 
-function operations.scroll_down()
-    keybow.tap_key(keybow.DOWN_ARROW)
+function operations.find()
+    keybow.tap_key_with_modifiers('f', keybow.LEFT_CTRL)
 end
 
-function operations.pycharm_back()
-    keybow.tap_key_with_modifiers('b', keybow.LEFT_META)
-end
-
-function operations.pycharm_to_declaration()
-    keybow.tap_key_with_modifiers(keybow.LEFT_ARROW, keybow.LEFT_META, keybow.LEFT_ALT)
-end
-
-function operations.git_commit_a()
-    keybow.text("git commit -a")
-    keybow.tap_enter()
-end
-
-function operations.git_pull()
-    keybow.text("git pull")
-    keybow.tap_enter()
-end
-
-function operations.git_tree()
-    keybow.text("git tree")
-    keybow.tap_enter()
-end
-
-function operations.git_push()
-    keybow.text("git push")
-    keybow.tap_enter()
-end
-
-function operations.open_chrome()
-	spotlight("chrome")
+function operations.keepass()
+    keybow.tap_key_with_modifiers('z', keybow.LEFT_CTRL, keybow.LEFT_SHIFT)
 end
 
 function spotlight(command)
@@ -71,22 +44,12 @@ function spotlight(command)
     keybow.sleep(500)
 end
 
-function operations.tap_a()
-    keybow.tap_key('a')
+function operations.open_chrome()
+	spotlight("chrome")
 end
 
-function operations.tap_b()
-    keybow.tap_key('b')
-end
 
-function operations.tap_c()
-    keybow.tap_key('c')
-end
-
-function operations.tap_d()
-    keybow.tap_key('d')
-end
-
+-- Number Pad
 function operations.num_1()
     keybow.tap_key('1')
 end
@@ -129,4 +92,144 @@ end
 
 function operations.full_stop()
     keybow.tap_key('.')
+end
+
+
+-- VLC Controls
+function operations.volup()
+    keybow.tap_key_with_modifiers(keybow.UP_ARROW, keybow.LEFT_CTRL)
+end
+
+function operations.voldown()
+    keybow.tap_key_with_modifiers(keybow.DOWN_ARROW, keybow.LEFT_CTRL)
+end
+
+function operations.mute()
+    keybow.tap_key('m')
+end
+
+function operations.play_pause()
+    keybow.tap_key(keybow.SPACE)
+end
+
+function operations.previous()
+    keybow.tap_key('p')
+end
+
+function operations.next()
+    keybow.tap_key('n')
+end
+
+function operations.forward()
+    keybow.tap_key_with_modifiers(keybow.RIGHT_ARROW, keybow.LEFT_ALT)
+end
+
+function operations.back()
+    keybow.tap_key_with_modifiers(keybow.LEFT_ARROW, keybow.LEFT_ALT)
+end
+
+function operations.subtitles()
+    keybow.tap_key('v')
+end
+
+function operations.fullscreen()
+    keybow.tap_key('f')
+end
+
+function operations.min_forward()
+    keybow.tap_key_with_modifiers(keybow.RIGHT_ARROW, keybow.LEFT_CTRL)
+end
+
+function operations.min_backward()
+    keybow.tap_key_with_modifiers(keybow.LEFT_ARROW, keybow.LEFT_CTRL)
+end
+
+
+-- Firefox
+function operations.move_tab_right()
+    keybow.tap_key_with_modifiers(keybow.PAGEDOWN, keybow.LEFT_CTRL)
+end
+
+function operations.move_tab_left()
+    keybow.tap_key_with_modifiers(keybow.PAGEUP, keybow.LEFT_CTRL)
+end
+
+function operations.close_tab()
+    keybow.tap_key_with_modifiers('w', keybow.LEFT_CTRL)
+end
+
+function operations.undo_close_tab()
+    keybow.tap_key_with_modifiers('T', keybow.LEFT_CTRL, keybow.LEFT_SHIFT)
+end
+
+function operations.browser_back()
+    keybow.tap_key_with_modifiers('[', keybow.LEFT_META)
+end
+
+function operations.browser_forward()
+    keybow.tap_key_with_modifiers(']', keybow.LEFT_META)
+end
+
+function operations.text_bigger()
+    keybow.tap_key_with_modifiers('+', keybow.LEFT_META)
+end
+
+function operations.text_smaller()
+    keybow.tap_key_with_modifiers('-', keybow.LEFT_META)
+end
+
+function operations.scroll_up()
+    keybow.tap_key(keybow.UP_ARROW)
+end
+
+function operations.scroll_down()
+    keybow.tap_key(keybow.DOWN_ARROW)
+end
+
+-- VSCode
+function operations.comment_uncomment()
+    keybow.tap_key_with_modifiers('/', keybow.LEFT_CTRL)
+end
+
+function operations.zen()
+    keybow.tap_key_with_modifiers('k', keybow.LEFT_CTRL)
+    keybow.tap_key('z')
+end
+
+function operations.command()
+    keybow.tap_key_with_modifiers('p', keybow.LEFT_SHIFT, keybow.LEFT_CTRL)
+end
+
+function operations.split()
+    keybow.tap_key_with_modifiers('\\', keybow.LEFT_CTRL)
+end
+
+function operations.fold()
+    keybow.tap_key_with_modifiers(']', keybow.LEFT_SHIFT, keybow.LEFT_CTRL)
+end
+
+function operations.unfold()
+    keybow.tap_key_with_modifiers('[', keybow.LEFT_SHIFT, keybow.LEFT_CTRL)
+end
+
+
+-- Git
+function operations.git_commit_a()
+    keybow.text("git commit -a")
+    keybow.tap_enter()
+end
+
+function operations.git_pull()
+    keybow.text("git pull")
+    keybow.tap_enter()
+end
+
+function operations.git_tree()
+    keybow.text("git tree")
+    keybow.tap_enter()
+end
+
+function operations.git_push()
+    keybow.text("git push")
+    keybow.tap_enter()
 end

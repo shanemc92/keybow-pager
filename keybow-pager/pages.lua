@@ -5,59 +5,35 @@ require 'keybow-pager/operations'
 
 pages = {}
 -- Support four pages of commands. 
--- Desktop (for basic desktop/browsing)
-pages.DESKTOP = 0
-pages.CODING = 1
-pages.APPS = 2
-pages.NUMPAD = 3
+-- General (for basic desktop/browsing)
+pages.GENERAL = 0
+-- Numpad (number keypad)
+pages.NUMPAD = 1
+-- Media (VLC Player shortcuts)
+pages.MEDIA = 2
+-- Coding (VS Code shortcuts)
+pages.CODING = 3
+
 
 pages.colors = {}
-pages.colors[pages.DESKTOP] = color.RED;
+pages.colors[pages.GENERAL] = color.RED;
 pages.colors[pages.CODING] = color.GREEN;
-pages.colors[pages.APPS] = color.BLUE;
+pages.colors[pages.MEDIA] = color.BLUE;
 pages.colors[pages.NUMPAD] = color.YELLOW;
 
 pages.operations = {}
-pages.operations[pages.DESKTOP] = {
-    operations.tap_a,
-    operations.tap_a,
-    operations.tap_a,
-    operations.tap_a,
-    operations.tap_a,
-    operations.tap_a,
-    operations.tap_a,
-    operations.tap_a,
-    operations.tap_a,
-    operations.tap_a,
-    operations.tap_a
-}
-
-pages.operations[pages.CODING] = {
-    operations.tap_b,
-    operations.tap_b,
-    operations.tap_b,
-    operations.tap_b,
-    operations.tap_b,
-    operations.tap_b,
-    operations.tap_b,
-    operations.tap_b,
-    operations.tap_b,
-    operations.tap_b,
-    operations.tap_b
-}
-
-pages.operations[pages.APPS] = {
-    operations.tap_c,
-    operations.tap_c,
-    operations.tap_c,
-    operations.tap_c,
-    operations.tap_c,
-    operations.tap_c,
-    operations.tap_c,
-    operations.tap_c,
-    operations.tap_c,
-    operations.tap_c,
-    operations.tap_c
+pages.operations[pages.GENERAL] = {
+    operations.cut,
+    operations.copy,
+    operations.paste,
+    operations.undo,
+    operations.select_all,
+    operations.redo,
+    operations.move_tab_left,
+    operations.close_tab,
+    operations.move_tab_right,
+    operations.undo_close_tab,
+    operations.keepass
 }
 
 pages.operations[pages.NUMPAD] = {
@@ -74,28 +50,60 @@ pages.operations[pages.NUMPAD] = {
     operations.full_stop
 }
 
-pages.operation_colors = {}
-pages.operation_colors[pages.DESKTOP] = {
-    color.RED, color.RED, color.RED, color.RED,
-    color.RED, color.RED, color.RED, color.RED,
-    color.RED, color.RED, color.RED
-}
-pages.operation_colors[pages.CODING] = {
-    color.GREEN, color.GREEN, color.GREEN, color.GREEN,
-    color.GREEN, color.GREEN, color.GREEN, color.GREEN,
-    color.GREEN, color.GREEN, color.GREEN
-}
-pages.operation_colors[pages.APPS] = {
-    color.BLUE, color.BLUE, color.BLUE, color.BLUE,
-    color.BLUE, color.BLUE, color.BLUE, color.BLUE,
-    color.BLUE, color.BLUE, color.BLUE
-}
-pages.operation_colors[pages.NUMPAD] = {
-    color.YELLOW, color.YELLOW, color.YELLOW, color.YELLOW,
-    color.YELLOW, color.YELLOW, color.YELLOW, color.YELLOW,
-    color.YELLOW, color.YELLOW, color.YELLOW
+pages.operations[pages.MEDIA] = {
+    operations.previous,
+    operations.play_pause,
+    operations.next,
+    operations.back,
+    operations.subtitles,
+    operations.forward,
+    operations.voldown,
+    operations.mute,
+    operations.volup,
+    operations.fullscreen,
+    operations.min_forward
 }
 
+pages.operations[pages.CODING] = {
+    operations.cut,
+    operations.copy,
+    operations.paste,
+    operations.undo,
+    operations.command,
+    operations.redo,
+    operations.fold,
+    operations.split,
+    operations.unfold,
+    operations.zen,
+    operations.comment_uncomment
+}
+
+-- Set the colors of each page
+pages.operation_colors = {}
+pages.operation_colors[pages.GENERAL] = {
+    color.CYAN, color.CYAN, color.CYAN,
+    color.CYAN, color.CYAN, color.CYAN, 
+    color.RED, color.RED, color.RED, 
+    color.RED, color.MAGENTA
+}
+pages.operation_colors[pages.NUMPAD]={
+    color.YELLOW, color.YELLOW, color.YELLOW, 
+    color.YELLOW, color.YELLOW, color.YELLOW, 
+    color.YELLOW, color.YELLOW, color.YELLOW, 
+    color.YELLOW, color.WHITE
+}
+pages.operation_colors[pages.MEDIA]={
+    color.ORANGE, color.WHITE, color.ORANGE, 
+    color.ORANGE, color.WHITE, color.ORANGE, 
+    color.WHITE, color.ORANGE, color.WHITE, 
+    color.WHITE, color.WHITE
+}
+pages.operation_colors[pages.CODING]={
+    color.RED, color.RED, color.RED, 
+    color.YELLOW, color.BLUE, color.YELLOW, 
+    color.MAGENTA, color.GREEN, color.MAGENTA, 
+    color.ORANGE, color.CYAN
+}
 
 pages.button_map = {
     button.ACTION_1, button.ACTION_2, button.ACTION_3,
@@ -105,9 +113,8 @@ pages.button_map = {
 }
 
 
--- the current page. Default at startup is numpad.
-pages.page = pages.NUMPAD
-
+-- the current page. Default at startup is general.
+pages.page = pages.GENERAL
 
 function pages.cycle_page(page_)
     if page_ == nil then
@@ -119,16 +126,12 @@ function pages.cycle_page(page_)
     else
         pages.page = page_
     end
+    pages.set_page(pages.page)
+end
+
+function pages.set_page(page_)
     button.set_color(button.TOGGLE, color.NONE)
-    if (pages.page == pages.DESKTOP) then
-        button.set_color(button.TOGGLE, pages.colors[pages.DESKTOP])
-    elseif (pages.page == pages.CODING) then
-        button.set_color(button.TOGGLE, pages.colors[pages.CODING])
-    elseif (pages.page == pages.APPS) then
-        button.set_color(button.TOGGLE, pages.colors[pages.APPS])
-    elseif (pages.page == pages.NUMPAD) then
-        button.set_color(button.TOGGLE, pages.colors[pages.NUMPAD])
-    end
+    button.set_color(button.TOGGLE, color.WHITE)
     
     for i = 1, 11, 1
     do
@@ -156,4 +159,3 @@ function pages.run_operation(button_id)
         operation()
     end
 end
-    
